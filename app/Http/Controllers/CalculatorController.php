@@ -28,7 +28,7 @@ class CalculatorController extends Controller
             $rate = $validated['rate'];
             $time = $validated['time'];
             $frequency = $validated['compounding_frequency'];
-            $startDate = $validated['start_date'] ?? null;
+            $startDate = isset($validated['start_date']) ? $validated['start_date'] : null;
 
             $periods = $this->getCompoundingPeriods($frequency);
             $formula = $this->getFormula($frequency);
