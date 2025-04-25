@@ -116,6 +116,14 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        'libsql' => [
+            'driver' => 'libsql',
+            'url' => env('DB_URL'),
+            'auth_token' => env('DB_AUTH_TOKEN'),
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ],
+
     ],
 
     /*
