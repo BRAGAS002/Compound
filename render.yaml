@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: compound-interest-calculator
+    env: php
+    buildCommand: composer install && npm install && npm run build
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
+    runtime: php
+    phpVersion: 8.2
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        fromEnvVar: APP_KEY
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromService:
+          type: pgsql
+          name: database
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        fromService:
+          type: pgsql
+          name: database
+          property: database
+      - key: DB_USERNAME
+        fromService:
+          type: pgsql
+          name: database
+          property: username
+      - key: DB_PASSWORD
+        fromService:
+          type: pgsql
+          name: database
+          property: password
+
+databases:
+  - name: database
+    ipAllowList: [] 
